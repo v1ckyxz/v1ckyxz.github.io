@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- NOVA TAG DO GOOGLE SEARCH CONSOLE -->
     <meta name="google-site-verification" content="n44mA3L1Fhni0QsIs01vLWDEB2Wdhu-E7DTjrAURaqk" />
+    
+    <!-- SCRIPT DO GOOGLE ADSENSE -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5884505401432123" crossorigin="anonymous"></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>MathPro | Calculadora Avançada & Gráfico Infinito</title>
@@ -30,32 +35,19 @@
             --border-radius: 16px;
         }
 
-        /* --- TRAVA DE TELA PARA CELULAR --- */
         html, body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-body);
             color: var(--text-primary);
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            /* position: fixed bloqueia a página de pular ou rolar no mobile */
-            position: fixed; 
-            overflow: hidden; 
-            overscroll-behavior: none; /* Remove o pull-to-refresh */
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            position: fixed; overflow: hidden; overscroll-behavior: none;
         }
 
         header {
-            width: 100%;
-            height: 65px; /* Altura fixa para calcular o resto da tela */
-            background-color: var(--bg-container);
-            padding: 0 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-sizing: border-box;
-            border-bottom: 1px solid var(--border-color);
-            z-index: 100;
+            width: 100%; height: 65px; background-color: var(--bg-container);
+            padding: 0 30px; display: flex; justify-content: space-between;
+            align-items: center; box-sizing: border-box;
+            border-bottom: 1px solid var(--border-color); z-index: 100;
         }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
         .logo span { color: var(--purple-light); }
@@ -66,106 +58,73 @@
             font-size: 1rem; font-weight: 500; cursor: pointer;
             padding: 8px 16px; border-radius: 20px; transition: all 0.3s;
         }
-        nav button:hover, nav button.active {
-            background-color: rgba(108, 92, 231, 0.15); color: var(--purple-light);
-        }
+        nav button:hover, nav button.active { background-color: rgba(108, 92, 231, 0.15); color: var(--purple-light); }
 
         main {
-            /* Ocupa exatamente a tela inteira menos o cabeçalho */
-            height: calc(100% - 65px); 
-            width: 100%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
-            box-sizing: border-box;
-            /* Permite rolagem suave apenas dentro do app, não na página inteira */
-            overflow-y: auto; 
+            height: calc(100% - 65px); width: 100%; position: relative;
+            display: flex; justify-content: center; align-items: flex-start;
+            padding: 20px; box-sizing: border-box; overflow-y: auto; 
             -webkit-overflow-scrolling: touch; 
         }
 
         #calc-section {
-            display: flex;
-            gap: 20px;
-            width: 100%;
-            max-width: 800px;
+            display: flex; gap: 20px; width: 100%;
+            max-width: 1100px; /* Aumentado para caber o anúncio + calc + histórico */
             align-items: flex-start; 
         }
 
-        .calc-wrapper {
-            flex: 2;
+        /* --- POSICIONAMENTO PARA COMPUTADOR --- */
+        .ad-wrapper {
+            width: 250px; /* Largura fixa do anúncio no PC */
             background-color: var(--bg-calculator);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            padding: 15px; border-radius: var(--border-radius);
             border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            order: 1; /* 1º elemento da esquerda no PC */
+        }
+        .calc-wrapper {
+            flex: 2; background-color: var(--bg-calculator); padding: 25px;
+            border-radius: var(--border-radius); box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color); display: flex; flex-direction: column;
+            order: 2; /* 2º elemento no meio no PC */
+        }
+        .history-wrapper {
+            flex: 1; background-color: var(--bg-calculator); padding: 20px;
+            border-radius: var(--border-radius); border: 1px solid var(--border-color);
+            display: flex; flex-direction: column; height: 480px; 
+            order: 3; /* 3º elemento da direita no PC */
         }
 
-        .history-wrapper {
-            flex: 1;
-            background-color: var(--bg-calculator);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            height: 480px; 
+        .ad-label {
+            font-size: 0.75rem; color: var(--text-secondary); 
+            margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;
         }
 
         .display-container {
-            background-color: var(--bg-display);
-            border-radius: 12px;
-            padding: 15px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            margin-bottom: 15px;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-            min-height: 90px;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background-color: var(--bg-display); border-radius: 12px; padding: 15px 20px;
+            display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 15px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); min-height: 90px;
+            justify-content: center; border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        #displayTop {
-            font-size: 1rem; color: var(--text-history); min-height: 1.2rem;
-            margin-bottom: 5px; font-family: 'Courier New', monospace;
-        }
-        
-        #displayBottom {
-            font-size: 2.2rem; color: #fff; font-family: 'Courier New', monospace;
-            word-break: break-all;
-        }
+        #displayTop { font-size: 1rem; color: var(--text-history); min-height: 1.2rem; margin-bottom: 5px; font-family: 'Courier New', monospace; }
+        #displayBottom { font-size: 2.2rem; color: #fff; font-family: 'Courier New', monospace; word-break: break-all; }
 
         .toggle-btn {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
-            color: var(--purple-light); font-size: 0.85rem; padding: 6px 14px;
-            border-radius: 20px; cursor: pointer; transition: all 0.2s; align-self: flex-start;
-            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--purple-light); font-size: 0.85rem; padding: 6px 14px;
+            border-radius: 20px; cursor: pointer; transition: all 0.2s; align-self: flex-start; margin-bottom: 15px;
         }
         .toggle-btn:hover { background: rgba(108, 92, 231, 0.15); }
 
         .keypad-sci {
-            display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
-            max-height: 0; opacity: 0; overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s ease, margin-bottom 0.3s ease;
-            margin-bottom: 0;
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 0; opacity: 0; overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, margin-bottom 0.3s ease; margin-bottom: 0;
         }
         .keypad-sci.open { max-height: 400px; opacity: 1; margin-bottom: 15px; }
-        
         .keypad-base { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 
-        button.calc-btn {
-            padding: 16px 10px; font-size: 1.1rem; border: none; border-radius: 8px;
-            cursor: pointer; transition: 0.2s; color: var(--text-primary);
-        }
-        
-        /* Ajuste de toques no celular para os botões */
+        button.calc-btn { padding: 16px 10px; font-size: 1.1rem; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; color: var(--text-primary); }
         button.calc-btn:active { transform: scale(0.95); opacity: 0.8; }
-
         .btn-sci { background-color: #343652; font-size: 0.9rem; }
         .btn-sci:hover { background-color: #424566; }
         .btn-base { background-color: rgba(255, 255, 255, 0.04); font-size: 1.3rem; }
@@ -175,100 +134,48 @@
         .btn-eq { background: var(--btn-equal-gradient); font-weight: 700; font-size: 1.5rem; }
         .btn-del { background-color: #4a2b3d; color: #ff9999; }
 
-        .history-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;
-        }
+        .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
         .history-header span { font-weight: 600; font-size: 1.1rem; }
-        .btn-clear-history {
-            background: transparent; border: none; color: #ff6b6b; cursor: pointer;
-            font-size: 0.9rem; transition: 0.2s; padding: 5px;
-        }
-        
-        .history-list {
-            flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;
-            padding-right: 5px; 
-        }
-        
+        .btn-clear-history { background: transparent; border: none; color: #ff6b6b; cursor: pointer; font-size: 0.9rem; transition: 0.2s; padding: 5px; }
+        .history-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; padding-right: 5px; }
         .history-list::-webkit-scrollbar { width: 6px; }
         .history-list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
-
-        .history-item {
-            text-align: right; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 8px;
-        }
+        .history-item { text-align: right; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 8px; }
         .history-item .expr { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 4px; }
         .history-item .res { font-size: 1.2rem; color: var(--purple-light); font-weight: 600; }
 
-        /* --- CONFIGURAÇÕES DO GRÁFICO --- */
-        #graph-section {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            width: 100%; height: 100%;
-            touch-action: none; /* ESSENCIAL: Impede o navegador de rolar a página ao tocar no gráfico */
-            overflow: hidden;
-        }
-        
-        #plot { 
-            width: 100%; height: 100%; background: var(--bg-display);
-        }
+        #graph-section { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; touch-action: none; overflow: hidden; }
+        #plot { width: 100%; height: 100%; background: var(--bg-display); }
 
         .graph-floating-ui {
-            position: absolute; top: 20px; left: 20px; z-index: 10;
-            background: rgba(38, 39, 61, 0.85); /* Efeito Vidro translúcido */
-            backdrop-filter: blur(10px);
-            padding: 15px; border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6); border: 1px solid var(--border-color);
-            width: 320px; display: flex; flex-direction: column; gap: 10px;
+            position: absolute; top: 20px; left: 20px; z-index: 10; background: rgba(38, 39, 61, 0.85); backdrop-filter: blur(10px);
+            padding: 15px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); border: 1px solid var(--border-color); width: 320px; display: flex; flex-direction: column; gap: 10px;
         }
-        
-        .graph-floating-ui input {
-            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);
-            background: rgba(10, 11, 18, 0.7); color: #fff; box-sizing: border-box; font-size: 1rem;
-        }
+        .graph-floating-ui input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(10, 11, 18, 0.7); color: #fff; box-sizing: border-box; font-size: 1rem; }
         .graph-btns { display: flex; gap: 10px; }
-        .graph-btns button {
-            flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;
-        }
+        .graph-btns button { flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
         .btn-plot { background: var(--btn-equal-gradient); color: #fff; }
         .btn-toggle-mini { background: #343652; color: var(--purple-light); }
-        
-        .btn-download {
-            flex: 0 0 auto; 
-            background: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid var(--border-color) !important;
-            color: var(--text-primary);
-            display: flex; align-items: center; justify-content: center;
-            padding: 10px !important; transition: all 0.2s;
-        }
+        .btn-download { flex: 0 0 auto; background: rgba(255, 255, 255, 0.05) !important; border: 1px solid var(--border-color) !important; color: var(--text-primary); display: flex; align-items: center; justify-content: center; padding: 10px !important; transition: all 0.2s; }
 
-        .mini-calc {
-            display: none; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-top: 10px;
-        }
+        .mini-calc { display: none; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-top: 10px; }
         .mini-calc.show { display: grid; }
-        .mini-calc button {
-            padding: 10px; background: rgba(255,255,255,0.08); border: none; font-size: 1.1rem;
-            color: #fff; border-radius: 5px; cursor: pointer;
-        }
-
+        .mini-calc button { padding: 10px; background: rgba(255,255,255,0.08); border: none; font-size: 1.1rem; color: #fff; border-radius: 5px; cursor: pointer; }
         .hidden { display: none !important; }
 
-        /* --- RESPONSIVIDADE PARA CELULARES --- */
+        /* --- RESPONSIVIDADE (ORDEM NO CELULAR) --- */
         @media (max-width: 768px) {
             header { padding: 0 15px; }
             main { padding: 15px 10px; }
-            
             #calc-section { flex-direction: column; gap: 15px; }
-            .calc-wrapper, .history-wrapper { width: 100%; padding: 15px; }
             
-            /* Botões levemente menores para caber melhor na tela sem rolar muito */
+            /* Usamos o "order" para trocar os blocos de lugar apenas no celular! */
+            .calc-wrapper { order: 1; width: 100%; padding: 15px; }      /* Calculadora no topo */
+            .ad-wrapper { order: 2; width: 100%; padding: 10px; }        /* Anúncio no meio (embaixo da calc) */
+            .history-wrapper { order: 3; width: 100%; padding: 15px; }   /* Histórico por último */
+            
             button.calc-btn { padding: 12px 5px; font-size: 1rem; }
-            
-            /* Ajusta a UI do Gráfico para o Celular */
-            .graph-floating-ui { 
-                left: 10px; right: 10px; 
-                width: auto; 
-                top: auto; 
-                bottom: 20px; /* Coloca o painel em baixo no celular para não atrapalhar o dedo */
-            }
+            .graph-floating-ui { left: 10px; right: 10px; width: auto; top: auto; bottom: 20px; }
         }
     </style>
 </head>
@@ -283,8 +190,23 @@
     </header>
 
     <main>
-        <!-- ABA: CALCULADORA -->
         <section id="calc-section">
+            
+            <!-- CAIXA DO ANÚNCIO (Lado esquerdo no PC / Embaixo da calc no Celular) -->
+            <div class="ad-wrapper">
+                <span class="ad-label">Publicidade</span>
+                <ins class="adsbygoogle"
+                     style="display:block; width: 100%;"
+                     data-ad-format="fluid"
+                     data-ad-layout-key="-gw-3+1f-3d+2z"
+                     data-ad-client="ca-pub-5884505401432123"
+                     data-ad-slot="2498099967"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <!-- CALCULADORA -->
             <div class="calc-wrapper">
                 <div class="display-container">
                     <div id="displayTop"></div>
@@ -299,13 +221,11 @@
                     <button class="calc-btn btn-sci" onclick="addToken('tan(', 'tan(')">tan</button>
                     <button class="calc-btn btn-sci" onclick="addToken('(', '(')">(</button>
                     <button class="calc-btn btn-sci" onclick="addToken(')', ')')">)</button>
-
                     <button class="calc-btn btn-sci" onclick="addToken('sin⁻¹(', 'asin(')">sin⁻¹</button>
                     <button class="calc-btn btn-sci" onclick="addToken('cos⁻¹(', 'acos(')">cos⁻¹</button>
                     <button class="calc-btn btn-sci" onclick="addToken('tan⁻¹(', 'atan(')">tan⁻¹</button>
                     <button class="calc-btn btn-sci" onclick="addToken('√(', 'sqrt(')">√</button>
                     <button class="calc-btn btn-sci" onclick="addToken('²', '^2')">x²</button>
-
                     <button class="calc-btn btn-sci" onclick="addToken('³', '^3')">x³</button>
                     <button class="calc-btn btn-sci" onclick="addToken('^', '^')">xʸ</button>
                     <button class="calc-btn btn-sci" onclick="addToken('π', 'pi')">π</button>
@@ -318,28 +238,25 @@
                     <button class="calc-btn btn-del" style="background:#3d3b4a;" onclick="backspace()">⌫</button>
                     <button class="calc-btn btn-op" onclick="addToken('%', '%')">%</button>
                     <button class="calc-btn btn-op" onclick="addToken('÷', '/')">÷</button>
-
                     <button class="calc-btn btn-base" onclick="addToken('7', '7')">7</button>
                     <button class="calc-btn btn-base" onclick="addToken('8', '8')">8</button>
                     <button class="calc-btn btn-base" onclick="addToken('9', '9')">9</button>
                     <button class="calc-btn btn-op" onclick="addToken('×', '*')">×</button>
-
                     <button class="calc-btn btn-base" onclick="addToken('4', '4')">4</button>
                     <button class="calc-btn btn-base" onclick="addToken('5', '5')">5</button>
                     <button class="calc-btn btn-base" onclick="addToken('6', '6')">6</button>
                     <button class="calc-btn btn-op" onclick="addToken('−', '-')">−</button>
-
                     <button class="calc-btn btn-base" onclick="addToken('1', '1')">1</button>
                     <button class="calc-btn btn-base" onclick="addToken('2', '2')">2</button>
                     <button class="calc-btn btn-base" onclick="addToken('3', '3')">3</button>
                     <button class="calc-btn btn-op" onclick="addToken('+', '+')">+</button>
-
                     <button class="calc-btn btn-base" style="grid-column: span 2" onclick="addToken('0', '0')">0</button>
                     <button class="calc-btn btn-base" onclick="addToken('.', '.')">.</button>
                     <button class="calc-btn btn-eq" onclick="calculate()">=</button>
                 </div>
             </div>
 
+            <!-- HISTÓRICO -->
             <aside class="history-wrapper">
                 <div class="history-header">
                     <span>Histórico</span>
@@ -349,7 +266,7 @@
             </aside>
         </section>
 
-        <!-- ABA: GRÁFICO -->
+        <!-- GRÁFICO -->
         <section id="graph-section" class="hidden">
             <div class="graph-floating-ui">
                 <input type="text" id="graphInput" value="sin(x)" placeholder="Insira a função (ex: x^2)" />
@@ -369,12 +286,10 @@
                     <button onclick="insertGraphText('^2')">x²</button>
                     <button onclick="insertGraphText('^')">^</button>
                     <button onclick="insertGraphText('sqrt(')">√</button>
-                    
                     <button onclick="insertGraphText('+')">+</button>
                     <button onclick="insertGraphText('-')">-</button>
                     <button onclick="insertGraphText('*')">*</button>
                     <button onclick="insertGraphText('/')">/</button>
-                    
                     <button onclick="insertGraphText('sin(')">sin</button>
                     <button onclick="insertGraphText('cos(')">cos</button>
                     <button onclick="insertGraphText('(')">(</button>
@@ -391,156 +306,59 @@
             const graphSec = document.getElementById('graph-section');
             document.getElementById('nav-calc').classList.toggle('active', tab === 'calc');
             document.getElementById('nav-graph').classList.toggle('active', tab === 'graph');
-
             if (tab === 'calc') {
-                calcSec.classList.remove('hidden');
-                graphSec.classList.add('hidden');
+                calcSec.classList.remove('hidden'); graphSec.classList.add('hidden');
             } else {
-                calcSec.classList.add('hidden');
-                graphSec.classList.remove('hidden');
-                // Pequeno atraso para o Plotly calcular o tamanho exato da tela do celular
+                calcSec.classList.add('hidden'); graphSec.classList.remove('hidden');
                 setTimeout(initGraph, 100); 
             }
         }
-
-        let tokens = []; 
-        let historyData = [];
-        let justCalculated = false;
-        const dispTop = document.getElementById('displayTop');
-        const dispBot = document.getElementById('displayBottom');
-
-        function updateDisplay() {
-            if (tokens.length === 0) dispBot.innerText = '0';
-            else dispBot.innerText = tokens.map(t => t.visual).join('');
-        }
-
-        function addToken(visual, mathStr) {
-            if (justCalculated) {
-                if (/[0-9]/.test(mathStr)) tokens = [];
-                justCalculated = false;
-            }
-            tokens.push({ visual: visual, mathStr: mathStr });
-            updateDisplay();
-        }
-
+        let tokens = []; let historyData = []; let justCalculated = false;
+        const dispTop = document.getElementById('displayTop'); const dispBot = document.getElementById('displayBottom');
+        function updateDisplay() { if (tokens.length === 0) dispBot.innerText = '0'; else dispBot.innerText = tokens.map(t => t.visual).join(''); }
+        function addToken(visual, mathStr) { if (justCalculated) { if (/[0-9]/.test(mathStr)) tokens = []; justCalculated = false; } tokens.push({ visual: visual, mathStr: mathStr }); updateDisplay(); }
         function clearAll() { tokens = []; dispTop.innerText = ''; updateDisplay(); }
         function backspace() { tokens.pop(); updateDisplay(); }
-
-        function toggleSci() {
-            const pad = document.getElementById('keypadSci');
-            const btn = document.querySelector('.toggle-btn');
-            pad.classList.toggle('open');
-            btn.innerText = pad.classList.contains('open') ? '⤡ Ocultar Científica' : '⤢ Expandir Científica';
-        }
-
+        function toggleSci() { const pad = document.getElementById('keypadSci'); const btn = document.querySelector('.toggle-btn'); pad.classList.toggle('open'); btn.innerText = pad.classList.contains('open') ? '⤡ Ocultar Científica' : '⤢ Expandir Científica'; }
         function calculate() {
             if (tokens.length === 0) return;
             const expressionVisual = tokens.map(t => t.visual).join('');
             const expressionMath = tokens.map(t => t.mathStr).join('');
             try {
-                const result = math.evaluate(expressionMath);
-                const formatResult = math.format(result, { precision: 12 });
-                dispTop.innerText = expressionVisual + ' =';
-                historyData.unshift({ expr: expressionVisual, res: formatResult });
-                renderHistory();
-                tokens = [{ visual: formatResult.toString(), mathStr: formatResult.toString() }];
-                updateDisplay();
-                justCalculated = true;
-            } catch (error) {
-                dispBot.innerText = 'Erro';
-                setTimeout(updateDisplay, 1500);
-            }
+                const result = math.evaluate(expressionMath); const formatResult = math.format(result, { precision: 12 });
+                dispTop.innerText = expressionVisual + ' ='; historyData.unshift({ expr: expressionVisual, res: formatResult });
+                renderHistory(); tokens = [{ visual: formatResult.toString(), mathStr: formatResult.toString() }];
+                updateDisplay(); justCalculated = true;
+            } catch (error) { dispBot.innerText = 'Erro'; setTimeout(updateDisplay, 1500); }
         }
-
-        function renderHistory() {
-            const list = document.getElementById('historyList');
-            list.innerHTML = historyData.map(item => `
-                <div class="history-item">
-                    <div class="expr">${item.expr} =</div>
-                    <div class="res">${item.res}</div>
-                </div>
-            `).join('');
-        }
+        function renderHistory() { const list = document.getElementById('historyList'); list.innerHTML = historyData.map(item => `<div class="history-item"><div class="expr">${item.expr} =</div><div class="res">${item.res}</div></div>`).join(''); }
         function clearHistory() { historyData = []; renderHistory(); }
-
         document.addEventListener('keydown', function(event) {
             if (document.getElementById('calc-section').classList.contains('hidden')) return;
             if (event.target.tagName === 'INPUT') return;
             const key = event.key;
-            if (/[0-9\.]/.test(key)) addToken(key, key);
-            else if (key === '+') addToken('+', '+');
-            else if (key === '-') addToken('−', '-');
-            else if (key === '*') addToken('×', '*');
-            else if (key === '/') addToken('÷', '/');
-            else if (key === '%') addToken('%', '%');
-            else if (key === '^') addToken('^', '^');
-            else if (key === '(' || key === ')') addToken(key, key);
-            else if (key === 'Enter' || key === '=') { event.preventDefault(); calculate(); }
-            else if (key === 'Backspace') backspace();
-            else if (key === 'Escape' || key === 'Delete') clearAll();
+            if (/[0-9\.]/.test(key)) addToken(key, key); else if (key === '+') addToken('+', '+'); else if (key === '-') addToken('−', '-'); else if (key === '*') addToken('×', '*'); else if (key === '/') addToken('÷', '/'); else if (key === '%') addToken('%', '%'); else if (key === '^') addToken('^', '^'); else if (key === '(' || key === ')') addToken(key, key); else if (key === 'Enter' || key === '=') { event.preventDefault(); calculate(); } else if (key === 'Backspace') backspace(); else if (key === 'Escape' || key === 'Delete') clearAll();
         });
-
-        // --- MÁGICA DO GRÁFICO ---
-        let currentCompiledFunc = null;
-        const plotDiv = document.getElementById('plot');
-
+        let currentCompiledFunc = null; const plotDiv = document.getElementById('plot');
         function toggleMiniCalc() { document.getElementById('miniCalc').classList.toggle('show'); }
-        function insertGraphText(text) {
-            const input = document.getElementById('graphInput');
-            input.value += text; input.focus();
-        }
-
+        function insertGraphText(text) { const input = document.getElementById('graphInput'); input.value += text; input.focus(); }
         function generatePlotData(compiledFunc, minX, maxX) {
-            let x = [], y = [];
-            let step = (maxX - minX) / 500; 
-            for(let i = minX; i <= maxX; i += step) {
-                x.push(i);
-                try { y.push(compiledFunc.evaluate({x: i})); } catch(e) { y.push(null); }
-            }
-            return {x, y};
+            let x = [], y = []; let step = (maxX - minX) / 500; 
+            for(let i = minX; i <= maxX; i += step) { x.push(i); try { y.push(compiledFunc.evaluate({x: i})); } catch(e) { y.push(null); } } return {x, y};
         }
-
         function initGraph() {
             const funcStr = document.getElementById('graphInput').value;
             try {
-                currentCompiledFunc = math.compile(funcStr);
-                const initialMinX = -10, initialMaxX = 10;
-                const data = generatePlotData(currentCompiledFunc, initialMinX, initialMaxX);
-
-                const trace = {
-                    x: data.x, y: data.y, type: 'scatter', mode: 'lines',
-                    line: { color: '#9d8df1', width: 3 }, fill: 'tozeroy', fillcolor: 'rgba(157, 141, 241, 0.1)'
-                };
-
-                const layout = {
-                    dragmode: 'pan',
-                    paper_bgcolor: '#0a0b12', plot_bgcolor: '#0a0b12',
-                    margin: { t: 10, r: 10, l: 40, b: 40 }, /* Pequena margem para caber bem no celular */
-                    xaxis: { gridcolor: 'rgba(255,255,255,0.08)', zerolinecolor: 'rgba(255,255,255,0.3)', range: [initialMinX, initialMaxX] },
-                    yaxis: { gridcolor: 'rgba(255,255,255,0.08)', zerolinecolor: 'rgba(255,255,255,0.3)' }
-                };
-
-                const config = {
-                    scrollZoom: true, responsive: true, displayModeBar: false
-                };
-
-                Plotly.newPlot('plot', [trace], layout, config);
+                currentCompiledFunc = math.compile(funcStr); const data = generatePlotData(currentCompiledFunc, -10, 10);
+                Plotly.newPlot('plot', [{ x: data.x, y: data.y, type: 'scatter', mode: 'lines', line: { color: '#9d8df1', width: 3 }, fill: 'tozeroy', fillcolor: 'rgba(157, 141, 241, 0.1)' }], { dragmode: 'pan', paper_bgcolor: '#0a0b12', plot_bgcolor: '#0a0b12', margin: { t: 10, r: 10, l: 40, b: 40 }, xaxis: { gridcolor: 'rgba(255,255,255,0.08)', zerolinecolor: 'rgba(255,255,255,0.3)', range: [-10, 10] }, yaxis: { gridcolor: 'rgba(255,255,255,0.08)', zerolinecolor: 'rgba(255,255,255,0.3)' } }, { scrollZoom: true, responsive: true, displayModeBar: false });
             } catch (err) { alert("Expressão inválida. Tente: x^2, sin(x), sqrt(x)"); }
         }
-
         plotDiv.on('plotly_relayout', function(eventData) {
             if (!currentCompiledFunc) return;
-            let minX = eventData['xaxis.range[0]'];
-            let maxX = eventData['xaxis.range[1]'];
-            if (minX !== undefined && maxX !== undefined) {
-                const newData = generatePlotData(currentCompiledFunc, minX, maxX);
-                Plotly.restyle(plotDiv, {x: [newData.x], y: [newData.y]}, [0]);
-            }
+            let minX = eventData['xaxis.range[0]']; let maxX = eventData['xaxis.range[1]'];
+            if (minX !== undefined && maxX !== undefined) { const newData = generatePlotData(currentCompiledFunc, minX, maxX); Plotly.restyle(plotDiv, {x: [newData.x], y: [newData.y]}, [0]); }
         });
-
-        function downloadGraph() {
-            Plotly.downloadImage(plotDiv, { format: 'png', width: 1200, height: 800, filename: 'grafico_mathpro' });
-        }
+        function downloadGraph() { Plotly.downloadImage(plotDiv, { format: 'png', width: 1200, height: 800, filename: 'grafico_mathpro' }); }
     </script>
 </body>
 </html>
